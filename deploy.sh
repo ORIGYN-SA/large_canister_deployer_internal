@@ -7,4 +7,4 @@ dfx canister call large_canister_deployer reset
 dfx canister call large_canister_deployer appendWasm 'vec { 123; 22; }'
 
 
-dfx canister call large_canister_deployer deployWasm
+dfx canister call large_canister_deployer deployWasm 'record {}'
