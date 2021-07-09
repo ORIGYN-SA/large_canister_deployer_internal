@@ -1,6 +1,7 @@
-import P "mo:base/Prelude";
 import Array "mo:base/Array";
+import Blob "mo:base/Blob";
 import MgmtCanister "./MgmtCanister";
+import P "mo:base/Prelude";
 
 actor {
 
@@ -25,10 +26,17 @@ actor {
     };
 
     // hash 
-    public func deployWasm(canisterSettings: ?MgmtCanister.Canister_settings): async (Principal) {
+    public func deployWasm(canisterSettings: ?MgmtCanister.Canister_settings, arg: [Nat8]): async (Principal) {
         let mgmtCanister = MgmtCanister.getManagementCanister();
         let resp = await mgmtCanister.create_canister({settings= null});
         // deploy the `canisterWasm` metadata and return the Principal
+        //  ({
+    //     mode : {#install; #reinstall; #upgrade};
+    //     canister_id : Principal;
+    //     wasm_module : Blob;
+    //     arg : Blob;
+    //   }) -> ();
+        let installResp = await mgmtCanister.install_code({mode=#install; canister_id=resp.canister_id;wasm_module=Blob.fromArray(canisterWasm);arg=Blob.fromArray(arg);});
         return resp.canister_id;
     };
 };

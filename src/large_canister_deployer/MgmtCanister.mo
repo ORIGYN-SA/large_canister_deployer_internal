@@ -18,23 +18,23 @@ module {
     };
 
     public type mgmtCanisterIDL = actor {
-        deposit_cycles: ({canister_id: Principal}) -> ();
+        deposit_cycles: ({canister_id: Principal}) -> async ();
         create_canister : ({
             settings : ?Canister_settings
         }) -> async ({canister_id : Principal});
         update_settings : ({
             canister_id : Principal;
             settings : Canister_settings
-        }) -> ();
+        }) -> async ();
         install_code : ({
             mode : {#install; #reinstall; #upgrade};
             canister_id : Principal;
             wasm_module : Blob;
             arg : Blob;
-        }) -> ();
-        uninstall_code : ({canister_id : Principal}) -> ();
-        start_canister : ({canister_id : Principal}) -> ();
-        stop_canister : ({canister_id : Principal}) -> ();
+        }) -> async ();
+        uninstall_code : ({canister_id : Principal}) -> async ();
+        start_canister : ({canister_id : Principal}) -> async ();
+        stop_canister : ({canister_id : Principal}) -> async ();
         canister_status : ({canister_id : Principal}) -> async ({
             status : { #running; #stopping; #stopped };
             settings: definite_canister_settings;
