@@ -1,10 +1,8 @@
 import P "mo:base/Prelude";
 import Array "mo:base/Array";
+import MgmtCanister "./MgmtCanister";
+
 actor {
-    type CanisterSettings = {
-        controller: Principal;
-        cycles: Nat64;
-    };
 
     var canisterWasm: [Nat8] = [];
     
@@ -27,8 +25,10 @@ actor {
     };
 
     // hash 
-    public func deployWasm(canisterSettings: CanisterSettings): async (Principal) {
+    public func deployWasm(canisterSettings: ?MgmtCanister.Canister_settings): async (Principal) {
+        let mgmtCanister = MgmtCanister.getManagementCanister();
+        let resp = await mgmtCanister.create_canister({settings= null});
         // deploy the `canisterWasm` metadata and return the Principal
-        P.nyi()
+        return resp.canister_id;
     };
 };
