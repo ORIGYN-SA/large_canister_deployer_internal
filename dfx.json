@@ -3,19 +3,6 @@
     "large_canister_deployer": {
       "main": "src/large_canister_deployer/main.mo",
       "type": "motoko"
-    },
-    "large_canister_deployer_assets": {
-      "dependencies": [
-        "large_canister_deployer"
-      ],
-      "frontend": {
-        "entrypoint": "src/large_canister_deployer_assets/src/index.html"
-      },
-      "source": [
-        "src/large_canister_deployer_assets/assets",
-        "dist/large_canister_deployer_assets/"
-      ],
-      "type": "assets"
     }
   },
   "defaults": {
